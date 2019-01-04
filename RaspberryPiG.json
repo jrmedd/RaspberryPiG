@@ -1,0 +1,512 @@
+[
+    {
+        "id": "ced86245.e76fd",
+        "type": "tab",
+        "label": "Raspberry PiG",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8eea146.3166fe8",
+        "type": "rpi-blinkt out",
+        "z": "ced86245.e76fd",
+        "name": "",
+        "x": 1330,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "3698d24b.9cfb7e",
+        "type": "e-mail in",
+        "z": "ced86245.e76fd",
+        "name": "Check emails",
+        "protocol": "IMAP",
+        "server": "imap.gmail.com",
+        "useSSL": true,
+        "port": "993",
+        "box": "INBOX",
+        "disposition": "None",
+        "repeat": "60",
+        "x": 490,
+        "y": 100,
+        "wires": [
+            [
+                "cd4d8966.6dea88"
+            ]
+        ]
+    },
+    {
+        "id": "3542114f.9675be",
+        "type": "twitter in",
+        "z": "ced86245.e76fd",
+        "twitter": "",
+        "tags": "jamesmedd",
+        "user": "false",
+        "name": "Search me on Twitter",
+        "inputs": 0,
+        "x": 520,
+        "y": 40,
+        "wires": [
+            [
+                "fbb46604.b35b58"
+            ]
+        ]
+    },
+    {
+        "id": "fbb46604.b35b58",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Send Twitter animation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "twitterColour",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "pulse",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 740,
+        "y": 40,
+        "wires": [
+            [
+                "8eea146.3166fe8",
+                "e2f80c7.3eaa4f"
+            ]
+        ]
+    },
+    {
+        "id": "cd4d8966.6dea88",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Send email animation",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "emailColour",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "pulse",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 100,
+        "wires": [
+            [
+                "8eea146.3166fe8",
+                "e2f80c7.3eaa4f"
+            ]
+        ]
+    },
+    {
+        "id": "695269af.355a08",
+        "type": "colour-picker",
+        "z": "ced86245.e76fd",
+        "name": "",
+        "pickedColour": "#1fff28",
+        "x": 70,
+        "y": 40,
+        "wires": [
+            [
+                "3d8ef105.2681de"
+            ]
+        ]
+    },
+    {
+        "id": "3d8ef105.2681de",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Set Email Colour",
+        "rules": [
+            {
+                "t": "set",
+                "p": "emailColour",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "df56ceb1.3b78f",
+        "type": "colour-picker",
+        "z": "ced86245.e76fd",
+        "name": "",
+        "pickedColour": "#58deff",
+        "x": 70,
+        "y": 100,
+        "wires": [
+            [
+                "ef7d0912.316848"
+            ]
+        ]
+    },
+    {
+        "id": "ef7d0912.316848",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Set Twitter Colour",
+        "rules": [
+            {
+                "t": "set",
+                "p": "twitterColour",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fdea7229.a24d3",
+        "type": "http request",
+        "z": "ced86245.e76fd",
+        "name": "Get co-ordinates by IP address",
+        "method": "GET",
+        "ret": "obj",
+        "url": "http://ip-api.com/json",
+        "tls": "",
+        "x": 170,
+        "y": 280,
+        "wires": [
+            [
+                "f3fdccdf.f8572"
+            ]
+        ]
+    },
+    {
+        "id": "8530e377.ee87d",
+        "type": "inject",
+        "z": "ced86245.e76fd",
+        "name": "Trigger every 15 minutes",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "900",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "fdea7229.a24d3"
+            ]
+        ]
+    },
+    {
+        "id": "f3fdccdf.f8572",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Set location and current time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "location.lat",
+                "pt": "msg",
+                "to": "payload.lat",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "location.lon",
+                "pt": "msg",
+                "to": "payload.lon",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 200,
+        "y": 340,
+        "wires": [
+            [
+                "272765d0.2b846a"
+            ]
+        ]
+    },
+    {
+        "id": "272765d0.2b846a",
+        "type": "darksky",
+        "z": "ced86245.e76fd",
+        "darksky": "",
+        "name": "Get weather for location and time",
+        "lon": "",
+        "lat": "",
+        "date": "",
+        "time": "",
+        "mode": "message",
+        "lang": "en",
+        "units": "us",
+        "x": 260,
+        "y": 400,
+        "wires": [
+            [
+                "5a7d40f5.84cef",
+                "2ac4ac3e.27ad84"
+            ]
+        ]
+    },
+    {
+        "id": "5a7d40f5.84cef",
+        "type": "switch",
+        "z": "ced86245.e76fd",
+        "name": "Check if weather mentions rain",
+        "property": "payload.weather",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "rain",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 570,
+        "y": 400,
+        "wires": [
+            [
+                "4d8f69d9.d90e58"
+            ],
+            [
+                "81af3b2.80a7fc8"
+            ]
+        ]
+    },
+    {
+        "id": "4d8f69d9.d90e58",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Set blue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "rainColour",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "all",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 400,
+        "wires": [
+            [
+                "8eea146.3166fe8"
+            ]
+        ]
+    },
+    {
+        "id": "81af3b2.80a7fc8",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Clear",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "clear",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1190,
+        "y": 440,
+        "wires": [
+            [
+                "8eea146.3166fe8"
+            ]
+        ]
+    },
+    {
+        "id": "e2f80c7.3eaa4f",
+        "type": "trigger",
+        "z": "ced86245.e76fd",
+        "op1": "",
+        "op2": "weather",
+        "op1type": "nul",
+        "op2type": "flow",
+        "duration": "1",
+        "extend": true,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "name": "Re-send weather",
+        "x": 930,
+        "y": 240,
+        "wires": [
+            [
+                "5bc0192f.154fe8"
+            ]
+        ]
+    },
+    {
+        "id": "2ac4ac3e.27ad84",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Store weather",
+        "rules": [
+            {
+                "t": "set",
+                "p": "weather",
+                "pt": "flow",
+                "to": "payload.weather",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5bc0192f.154fe8",
+        "type": "switch",
+        "z": "ced86245.e76fd",
+        "name": "Check stored weather",
+        "property": "weather",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "rain",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 960,
+        "y": 300,
+        "wires": [
+            [
+                "4d8f69d9.d90e58"
+            ],
+            [
+                "81af3b2.80a7fc8"
+            ]
+        ]
+    },
+    {
+        "id": "d6b47aeb.556278",
+        "type": "colour-picker",
+        "z": "ced86245.e76fd",
+        "name": "",
+        "pickedColour": "#0000ff",
+        "x": 70,
+        "y": 160,
+        "wires": [
+            [
+                "569cec53.d75454"
+            ]
+        ]
+    },
+    {
+        "id": "569cec53.d75454",
+        "type": "change",
+        "z": "ced86245.e76fd",
+        "name": "Set Rain Colour",
+        "rules": [
+            {
+                "t": "set",
+                "p": "rainColour",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    }
+]
