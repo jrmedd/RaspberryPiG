@@ -127,7 +127,7 @@
         "type": "colour-picker",
         "z": "ced86245.e76fd",
         "name": "",
-        "pickedColour": "#1fff28",
+        "pickedColour": "#ff3be2",
         "x": 70,
         "y": 40,
         "wires": [
@@ -225,7 +225,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "repeat": "900",
+        "repeat": "300",
         "crontab": "",
         "once": true,
         "onceDelay": 0.1,
@@ -305,7 +305,7 @@
         "type": "switch",
         "z": "ced86245.e76fd",
         "name": "Check if weather mentions rain",
-        "property": "payload.weather",
+        "property": "data.minutely.icon",
         "propertyType": "msg",
         "rules": [
             {
@@ -373,6 +373,13 @@
         "rules": [
             {
                 "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0, 0, 0",
+                "tot": "str"
+            },
+            {
+                "t": "set",
                 "p": "topic",
                 "pt": "msg",
                 "to": "clear",
@@ -424,7 +431,7 @@
                 "t": "set",
                 "p": "weather",
                 "pt": "flow",
-                "to": "payload.weather",
+                "to": "data.minutely.icon",
                 "tot": "msg"
             }
         ],

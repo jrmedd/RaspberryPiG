@@ -19,7 +19,8 @@ Short workshop sessions put pressure on the student and the teacher. **Absolute 
 
 Node-RED *does* somewhat obfuscate the complexity of the code that powers it, but it is a complete system and useful playground for newcomers to experiment in. I think it's a useful tool for making rapid prototypes too and, as a teacher, it's easy for me to scan my eyes over to make sure students are keeping up.
 
-## How does it work?
+
+## How does it work?
 
 There's a Node-RED flow that students can construct, or that you can import directly from the flow .json file.
 
