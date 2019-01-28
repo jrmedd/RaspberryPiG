@@ -1,0 +1,231 @@
+[
+    {
+        "id": "17906901.26a507",
+        "type": "tab",
+        "label": "Guide to nodes",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "735394bd.a216dc",
+        "type": "colour-picker",
+        "z": "17906901.26a507",
+        "name": "",
+        "pickedColour": "#ff0000",
+        "x": 210,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2a2378ad.871978",
+        "type": "change",
+        "z": "17906901.26a507",
+        "name": "Set flow variable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "someColour",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c496a5a4.91cf68",
+        "type": "inject",
+        "z": "17906901.26a507",
+        "name": "Trigger events, on a timer",
+        "topic": "",
+        "payload": "hello",
+        "payloadType": "str",
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 160,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3620e975.1ed736",
+        "type": "darksky",
+        "z": "17906901.26a507",
+        "darksky": "",
+        "name": "Get weather info",
+        "lon": "",
+        "lat": "",
+        "date": "",
+        "time": "",
+        "mode": "node",
+        "lang": "en",
+        "units": "us",
+        "x": 700,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89c11df1.61003",
+        "type": "switch",
+        "z": "17906901.26a507",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "hello",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b54fa337.f74fe",
+        "type": "debug",
+        "z": "17906901.26a507",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 890,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a6309f0c.b871c",
+        "type": "e-mail in",
+        "z": "17906901.26a507",
+        "name": "",
+        "protocol": "IMAP",
+        "server": "imap.gmail.com",
+        "useSSL": true,
+        "port": "993",
+        "box": "INBOX",
+        "disposition": "Read",
+        "repeat": "300",
+        "x": 230,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "15a2da4a.89e4e6",
+        "type": "twitter in",
+        "z": "17906901.26a507",
+        "twitter": "",
+        "tags": "",
+        "user": "false",
+        "name": "",
+        "inputs": 1,
+        "x": 230,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "954bcbdf.0a9bf8",
+        "type": "http request",
+        "z": "17906901.26a507",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "url": "http://ip-api.com/json",
+        "tls": "",
+        "x": 690,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5e3620e7.df893",
+        "type": "trigger",
+        "z": "17906901.26a507",
+        "op1": "",
+        "op2": "someColour",
+        "op1type": "nul",
+        "op2type": "flow",
+        "duration": "250",
+        "extend": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "name": "",
+        "x": 700,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b5140e88.80dec",
+        "type": "change",
+        "z": "17906901.26a507",
+        "name": "Set location and current time",
+        "rules": [
+            {
+                "t": "set",
+                "p": "location.lat",
+                "pt": "msg",
+                "to": "payload.lat",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "location.lon",
+                "pt": "msg",
+                "to": "payload.lon",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "",
+                "tot": "date"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    }
+]
